@@ -46,7 +46,7 @@ function NavBar() {
         <li>
           <a
             onClick={() => scrollToSection("unvalidatedStudents")}
-            className="hover:underline flex gap-2 m-2 p-1 hover:border-b-2 border-white cursor-pointer"
+            className=" flex gap-2 m-2 p-1 hover:border-b-2 border-white cursor-pointer"
           >
             <span className="md:hidden">Unvalidated Students</span>
             <FaUserTimes size={30} />
@@ -55,7 +55,7 @@ function NavBar() {
         <li>
           <a
             onClick={() => scrollToSection("barChart")}
-            className="hover:underline flex gap-2 m-2 p-1 hover:border-b-2 border-white cursor-pointer"
+            className=" flex gap-2 m-2 p-1 hover:border-b-2 border-white cursor-pointer"
           >
             <span className="md:hidden">Voting Chart</span>
             <FaChartBar size={30} />

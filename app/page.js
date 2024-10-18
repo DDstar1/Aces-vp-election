@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import BarChart from "@/components/BarChart"; // Import the BarChart component
 import { useToast } from "@/hooks/use-toast";
 import NavBar from "@/components/NavBar";
-import { MoonLoader } from "react-spinners";
+import { MoonLoader, ClipLoader } from "react-spinners"; // Import loaders
 
 const Page = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { toast } = useToast();
+  const [buttonLoading, setButtonLoading] = useState({}); // State to track button loading status
 
   // Fetch data from Google Apps Script
   useEffect(() => {
@@ -34,6 +35,7 @@ const Page = () => {
 
   // Function to update the validity field using API
   const updateValidity = async (email, newValidity) => {
+    setButtonLoading((prevState) => ({ ...prevState, [email]: true })); // Set loading for the clicked button
     try {
       const response = await fetch(
         `https://script.google.com/macros/s/AKfycbwn3mGJK3gY6q9QvBkCKeKhy1jKWyEPG7VDGKNPhBH3rJ7dcubwWLScUCr0EzMVF0-7nQ/exec?edit=true&email=${email}&valid=${newValidity}`
@@ -59,6 +61,8 @@ const Page = () => {
         variant: "destructive",
         description: "There was a problem with your request.",
       });
+    } finally {
+      setButtonLoading((prevState) => ({ ...prevState, [email]: false })); // Stop loading after request is done
     }
   };
 
@@ -142,14 +146,19 @@ const Page = () => {
                     {student["Choose your Vice President"]}
                   </td>
                   <td className="py-3 px-2 text-green-500">True</td>
-                  <td className="py-3 px-2">
+                  <td className="py-3 px-2 flex items-center justify-center">
                     <button
                       onClick={() =>
                         updateValidity(student["Email Address"], "false")
                       }
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"
+                      disabled={buttonLoading[student["Email Address"]]} // Disable button while loading
                     >
-                      Toggle Validity
+                      {buttonLoading[student["Email Address"]] ? (
+                        <ClipLoader size={15} color={"#fff"} /> // Show spinner
+                      ) : (
+                        "Toggle Validity"
+                      )}
                     </button>
                   </td>
                 </tr>
@@ -195,14 +204,19 @@ const Page = () => {
                     {student["Choose your Vice President"]}
                   </td>
                   <td className="py-3 px-2 text-red-500">False</td>
-                  <td className="py-3 px-2">
+                  <td className="py-3 px-2 flex items-center justify-center">
                     <button
                       onClick={() =>
                         updateValidity(student["Email Address"], "true")
                       }
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"
+                      disabled={buttonLoading[student["Email Address"]]} // Disable button while loading
                     >
-                      Toggle Validity
+                      {buttonLoading[student["Email Address"]] ? (
+                        <ClipLoader size={15} color={"#fff"} /> // Show spinner
+                      ) : (
+                        "Toggle Validity"
+                      )}
                     </button>
                   </td>
                 </tr>
