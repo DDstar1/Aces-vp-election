@@ -50,11 +50,15 @@ const BarChart = ({ data }) => {
       .nice()
       .range([height, 0]);
 
-    // Append X Axis
+    // Append X Axis (truncate candidate names)
     svg
       .append("g")
       .attr("transform", `translate(0,${height})`)
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(x))
+      .selectAll("text")
+      .text((d) => (d.length > 15 ? d.substring(0, 15) + "..." : d)) // Truncate long names
+      .attr("text-anchor", "middle")
+      .attr("fill", "black"); // Adjust label color if necessary
 
     // Append Y Axis
     svg.append("g").call(d3.axisLeft(y));
@@ -72,7 +76,7 @@ const BarChart = ({ data }) => {
       .attr("height", (d) => height - y(d[1]))
       .attr("fill", "steelblue");
 
-    // Labels (Make the total labels white)
+    // Labels (show vote counts, truncate long numbers)
     svg
       .selectAll(".label")
       .data(voteCounts)
@@ -84,9 +88,9 @@ const BarChart = ({ data }) => {
       .attr("text-anchor", "middle")
       .attr("fill", "white") // Set the label color to white
       .text((d) => {
-    let text = d[1].toString(); // Convert to string if necessary
-    return text.length > 10 ? text.substring(0, 10) + '...' : text;
-  });
+        let text = d[1].toString(); // Convert vote count to string
+        return text.length > 15 ? text.substring(0, 15) + "..." : text; // Truncate long numbers
+      });
 
     // Handle window resize to keep the chart responsive
     const resize = () => {
