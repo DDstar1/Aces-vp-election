@@ -83,7 +83,10 @@ const BarChart = ({ data }) => {
       .attr("y", (d) => y(d[1]) - 5)
       .attr("text-anchor", "middle")
       .attr("fill", "white") // Set the label color to white
-      .text((d) => d[1]);
+      .text((d) => {
+    let text = d[1].toString(); // Convert to string if necessary
+    return text.length > 10 ? text.substring(0, 10) + '...' : text;
+  });
 
     // Handle window resize to keep the chart responsive
     const resize = () => {
