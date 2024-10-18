@@ -1,0 +1,24 @@
+/* styles.css */
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner_border {
+  width: 3rem;
+  height: 3rem;
+  border: 0.25em solid rgba(255, 255, 255, 0.5);
+  border-top-color: #ffffff; /* Spinner color */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

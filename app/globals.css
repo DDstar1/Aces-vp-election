@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --neon-color: #bc13fe; /* --neon-color: #510CEF; */
+}
+
+body {
+  /* color: var(--foreground);
+  background: var(--background); */
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(69, 30, 165);
+  background: radial-gradient(circle, #451ea5 0%, rgba(27, 27, 33, 1) 100%);
+  background-attachment: fixed; /* This makes the gradient fixed */
+  background-size: cover; /* Ensures the gradient covers the entire viewport */
+  background-position: center;
+  scrollbar-width: thin; /* For Firefox */
+  scroll-behavior: smooth;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+div {
+  scrollbar-width: thin; /* For Firefox */
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
+
+/* styles.css */
+@keyframes text_ani {
+  0% {
+    transform: scale(1); /* Scale up to twice the size */
+  }
+  50% {
+    transform: scale(1.4); /* Scale back to original size */
+  }
+  100% {
+    transform: scale(1); /* Scale back to original size */
+  }
+}
+
+.text-ani {
+  animation: text_ani 2s forwards; /* Play animation for 3 seconds */
+}
+
+h2 {
+  text-align: center;
+}
