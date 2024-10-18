@@ -58,7 +58,7 @@ const BarChart = ({ data }) => {
       .selectAll("text")
       .text((d) => (d.length > 15 ? d.substring(0, 15) + "..." : d)) // Truncate long names
       .attr("text-anchor", "middle")
-      .attr("fill", "black"); // Adjust label color if necessary
+      .attr("fill", "white"); // Adjust label color if necessary
 
     // Append Y Axis
     svg.append("g").call(d3.axisLeft(y));
