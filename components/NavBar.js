@@ -28,7 +28,7 @@ function NavBar() {
         <li>
           <a
             onClick={() => scrollToSection("totalCounts")}
-            className="flex gap-2 m-2 p-1 hover:border-b-2 border-white cursor-pointer max-w-[30px] overflow-hidden max-h-[30px]"
+            className="flex gap-2 m-2 p-1 hover:border-b-2 border-white cursor-pointer max-w-[54px] overflow-hidden max-h-[54px]"
           >
             <span className="md:hidden">Total Counts</span>
             <FaUsers size={30} />
